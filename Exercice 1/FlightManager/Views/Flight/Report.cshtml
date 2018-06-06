@@ -1,0 +1,73 @@
+﻿@model IEnumerable<FlightViewModel>
+
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arrival)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightAirline.AirlineName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartureAirportId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalAirportId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightDistance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FuelConsumption)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arrival)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightAirline.AirlineName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.From.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.To.Name)
+            </td>
+            <td>
+                @string.Format("{0}h:{1}", TimeSpan.FromHours(item.FlightTime).Hours, TimeSpan.FromHours(item.FlightTime).Minutes)
+            </td>
+            <td>
+                @string.Format("{0:0.00} Km", item.FlightDistance)
+            </td>
+            <td>
+                @string.Format("{0:0.00} Kg", item.FuelConsumption)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a class="btn btn-default" asp-action="Index">Back to List</a>
+</div>
