@@ -70,5 +70,19 @@ namespace FilesLibrary
             }
 
         }
+
+        public static XmlDocument ReadEncryptedXmlFile(string path, string initialVector, string key)
+        {
+            try
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load(CryptoHelper.Decrypt(ReadTextFile(path), initialVector, key));
+                return xmlDocument;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
