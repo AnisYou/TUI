@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.IO;
 using System.Threading;
 using System.Xml;
@@ -101,6 +102,23 @@ namespace FilesLibrary
 
             }
 
+        }
+
+        public static JObject ReadJsonFile(string path)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    return JObject.Parse(File.ReadAllText(path));
+
+                }
+                throw new FileNotFoundException();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
