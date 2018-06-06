@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Xml;
 
 namespace FilesLibrary
@@ -50,6 +51,24 @@ namespace FilesLibrary
             {
                 throw ex;
             }
+        }
+
+        public static XmlDocument ReadXmlFileInRole(string path, string role)
+        {
+            try
+            {
+                if (Thread.CurrentPrincipal.IsInRole(role))
+                {
+                    return ReadXmlFile(path);
+                }
+                throw new UnauthorizedAccessException();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
         }
     }
 }
