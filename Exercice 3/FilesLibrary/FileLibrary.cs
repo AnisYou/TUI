@@ -39,5 +39,17 @@ namespace FilesLibrary
                 throw ex;
             }
         }
+
+        public static string ReadEncryptedTextFile(string path, string initialVector, string key)
+        {
+            try
+            {
+                return CryptoHelper.Decrypt(ReadTextFile(path), initialVector, key);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
