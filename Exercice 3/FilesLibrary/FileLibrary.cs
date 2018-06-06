@@ -120,5 +120,21 @@ namespace FilesLibrary
                 throw ex;
             }
         }
+
+        public static JObject ReadEncryptedJsonFile(string path, string initialVector, string key)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    return JObject.Parse(CryptoHelper.Decrypt(ReadTextFile(path), initialVector, key));
+                }
+                throw new FileNotFoundException();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
