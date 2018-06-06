@@ -136,5 +136,23 @@ namespace FilesLibrary
                 throw ex;
             }
         }
+
+        public static JObject ReadJsonFileInRole(string path, string role)
+        {
+            try
+            {
+                if (Thread.CurrentPrincipal.IsInRole(role))
+                {
+                    return ReadJsonFile(path);
+                }
+                throw new UnauthorizedAccessException();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+        }
     }
 }
